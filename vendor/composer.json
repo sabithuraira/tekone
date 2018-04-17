@@ -1,0 +1,6 @@
+{
+    "require": {
+        "hscstudio/yii2-export": "*",
+        "hscstudio/yii2-chart": "~1.0"
+    }
+}
