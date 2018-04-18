@@ -4,15 +4,16 @@
 use yii\helpers\Html;
 use hscstudio\chart\ChartNew;
 use kartik\social\Disqus;
-$this->title = 'TEKWAN';
+use yii\helpers\Url;
+$this->title = 'For TEKWAN';
 
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-	 
+<img src="<?php echo Url::base();?>/cover/bps.png" width="16%"></img>
 <h1>Selamat Datang!</h1> 
-        <p class="lead">Website ini merupakan aplikasi untuk input data-data PDRB.</p>
+        <p class="lead">Di Forum Temu Ekonomi Triwulanan</p>
 
        
     </div>

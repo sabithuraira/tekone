@@ -39,7 +39,7 @@ $form = ActiveForm::begin();
 	<div class="box box-solid box-info">
 	<div class="box-header with-border"><h3 class="box-title">
 	<span class="fa fa-tags"></span>
-	TABEL PDRB  PENGELUARAN TD 2010 ADH BERLAKU TAHUN <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
+	TABEL PDRB  SEKTORAL TD 2010 ADH BERLAKU TAHUN <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
 	</div>
 	
 	<div class="box-body">	
@@ -228,7 +228,7 @@ $form = ActiveForm::begin();
 	<div class="box box-solid box-info">
 	<div class="box-header with-border"><h3 class="box-title">
 	<span class="fa fa-tags"></span>
-	TABEL PDRB  PENGELUARAN TD 2010 ADH KONSTAN <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
+	TABEL PDRB  SEKTORAL TD 2010 ADH KONSTAN <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
 	</div>
 	
 	<div class="box-body">	
@@ -415,7 +415,7 @@ $form = ActiveForm::begin();
 	<div class="box box-solid box-info">
 	<div class="box-header with-border"><h3 class="box-title">
 	<span class="fa fa-tags"></span>
-	TABEL DISTRIBUSI PDRB  PENGELUARAN TD 2010 ADH BERLAKU <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
+	TABEL DISTRIBUSI PDRB  SEKTORAL TD 2010 ADH BERLAKU <?php echo $th.' TRIWULAN '.$triwulan?> </h3>
 	</div>
 	<div class="box-body">	
 	<table class="table table-hover table-bordered">

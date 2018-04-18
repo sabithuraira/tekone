@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini"><img src="'.Yii::$app->request->baseUrl.'/cover/bps.png" width="42"></span><span class="logo-lg"><img src="'.Yii::$app->request->baseUrl.'/cover/bps.png" width="42">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini"><img src="'.Yii::$app->request->baseUrl.'/cover/bps.png" width="42"></span><span class="logo-lg"><img src="'.Yii::$app->request->baseUrl.'/cover/bps.png" width="42"> ' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 

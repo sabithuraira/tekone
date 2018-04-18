@@ -65,7 +65,7 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-	    public function actionForum()
+	public function actionForum()
     {
         return $this->render('forum');
     }
@@ -122,8 +122,14 @@ class SiteController extends Controller
     ]);
 	
     }
+
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
+    }
 		    
-			public function actionInputdata()
+	public function actionInputdata()
     {
 	$input = new \app\models\inputd();
 	$model = new \app\models\tahun();
@@ -179,32 +185,32 @@ $field = [
 					else if($judul==8) { 
 					if(empty($tabel8)) $model = new \app\models\LajuPertumbuhanIndeksImplisit();
 					else $model=$tabel8;}
-					else ;
+                    else ;
 					
-                    $model->a = $sheetData[4]['B'];
-					$model->b = $sheetData[5]['B'];
-                    $model->c = $sheetData[6]['B'];
-                    $model->d = $sheetData[7]['B'];
-                    $model->e = $sheetData[8]['B'];
-                    $model->f = $sheetData[9]['B'];
-                    $model->g = $sheetData[10]['B'];
-                    $model->h= $sheetData[11]['B'];                    $model->a = $sheetData[4]['B'];
-					$model->i = $sheetData[12]['B'];
-                    $model->j = $sheetData[13]['B'];
-                    $model->k = $sheetData[14]['B'];
-                    $model->l = $sheetData[15]['B'];
-                    $model->m = $sheetData[16]['B'];
-                    $model->o = $sheetData[17]['B'];
-                    $model->p= $sheetData[18]['B'];                    $model->o = $sheetData[10]['B'];
-                    $model->q= $sheetData[19]['B'];
-                    $model->r= $sheetData[20]['B'];
-                    $model->pdrb = $sheetData[21]['B'];
-                    $model->pdrb_tanpa_migas = $sheetData[22]['B'];
+                    $model->a = $this->floatvalue($sheetData[4]['B']);
+					$model->b = $this->floatvalue($sheetData[5]['B']);
+                    $model->c = $this->floatvalue($sheetData[6]['B']);
+                    $model->d = $this->floatvalue($sheetData[7]['B']);
+                    $model->e = $this->floatvalue($sheetData[8]['B']);
+                    $model->f = $this->floatvalue($sheetData[9]['B']);
+                    $model->g = $this->floatvalue($sheetData[10]['B']);
+                    $model->h = $this->floatvalue($sheetData[11]['B']); 
+					$model->i = $this->floatvalue($sheetData[12]['B']);
+                    $model->j = $this->floatvalue($sheetData[13]['B']);
+                    $model->k = $this->floatvalue($sheetData[14]['B']);
+                    $model->l = $this->floatvalue($sheetData[15]['B']);
+                    $model->m = $this->floatvalue($sheetData[16]['B']);
+                    $model->o = $this->floatvalue($sheetData[17]['B']);
+                    $model->p = $this->floatvalue($sheetData[18]['B']);   
+                    $model->q = $this->floatvalue($sheetData[19]['B']);
+                    $model->r = $this->floatvalue($sheetData[20]['B']);
+                    $model->pdrb = $this->floatvalue($sheetData[21]['B']);
+                    $model->pdrb_tanpa_migas = $this->floatvalue($sheetData[22]['B']);
                     $model->triwulan = $tw;
                     $model->tahun = $th;
 
                     $model->save(); 
-                    //die(print_r($model->errors));
+                    // die(print_r($model));
                     Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
                 }
 				else Yii::$app->getSession()->setFlash('error', 'Error!!!, File yang diupload kosong atau Tidak Sesuai');
@@ -225,35 +231,39 @@ $field = [
             ]);
     }
 	
-   			public function actionProfil()
+   	public function actionProfil()
     {
         return $this->render('Profil');
     }
-		    public function actionTabelFenomena()
-			{
-	$input = new \app\models\inputd();
-	        if (Yii::$app->request->post()) {
-			$th = $_POST['Inputd']['tahun'];
-			$tw = $_POST['Inputd']['tw'];
-			$kab= $_POST['Inputd']['kab'];
-	$tabel1 = \app\models\Fenomena::find()->where(['tahun' => $th,'triwulan' => $tw,'id_kab'=>$kab  ])->one();
-	
-	        return $this->render('tabel-pokok', [
-         'model1' => $tabel1,
-         'input' => $input,
-		 'th' => $th,
-		 'triwulan' => $tw,
-		 'kab' => $kab,
-    ]);
-}
-	$tabel1 = \app\models\Fenomena::find()->orderBy('id DESC')->one();
-	
-	        return $this->render('tabel-fenomena', [
-         'model1' => $tabel1,
-         'input' => $input,
-		 'th' => $tabel1->tahun,
-		 'triwulan' => $tabel1->triwulan,
-    ]);
+            
+    public function actionTabelFenomena()
+	{
+        $input = new \app\models\inputd();
+        
+        if (Yii::$app->request->post()) {
+            $th = $_POST['Inputd']['tahun'];
+            $tw = $_POST['Inputd']['tw'];
+            $kab= $_POST['Inputd']['kab'];
+            $tabel1 = \app\models\Fenomena::find()->where(['tahun' => $th,'triwulan' => $tw,'id_kab'=>$kab  ])->one();
+        
+            return $this->render('fenomena', [
+                'model1' => $tabel1,
+                'input' => $input,
+                'th' => $th,
+                'triwulan' => $tw,
+                'kab' => $kab,
+            ]);
+        }
+
+        $tabel1 = \app\models\Fenomena::find()->orderBy('id DESC')->one();
+
+        return $this->render('fenomena', [
+            'model1' => $tabel1,
+            'input' => $input,
+            'th' => $tabel1->tahun,
+            'triwulan' => $tabel1->triwulan,
+            'kabid' => $tabel1->id_kab,
+        ]);
 	
     }
 

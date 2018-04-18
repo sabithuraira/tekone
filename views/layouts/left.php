@@ -135,7 +135,7 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Series Data', 'icon' => 'fa fa-file-code-o', 'url' => ['/site/data-series'],],
-                            //['label' => 'Lainnya', 'icon' => 'fa fa-file-code-o', 'url' => ['/aram/index'],],
+                            ['label' => 'Fenomena', 'icon' => 'fa fa-file-code-o', 'url' => ['/site/tabel-fenomena'],],
                    
 
                         ],

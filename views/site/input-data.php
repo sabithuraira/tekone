@@ -61,7 +61,7 @@ $form = ActiveForm::begin([
   <div class="col-xs-3 col-md-3">
   </div>
 <div class="col-xs-3 col-md-3"><?= Html::submitButton('Upload', ['class'=> 'btn btn-success btn-block','style'=>'font-size:14px;padding:7px;']) ?></div>  
-<div class="col-xs-3 col-md-3"><?= Html::a('Download Tamplate', \yii\helpers\Url::to('@web/excel/bi.xlsx') ,['style'=> 'vertical-align:middle',]) ?></div>
+<div class="col-xs-3 col-md-3"><?= Html::a('Download Tamplate', \yii\helpers\Url::to('@web/excel/pdrb.xlsx') ,['style'=> 'vertical-align:middle',]) ?></div>
 <div class="col-xs-3 col-md-3"></div>
 </div>
 
