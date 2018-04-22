@@ -19,6 +19,11 @@ $form = ActiveForm::begin();
 <div class="box box-default">
     <div class="box-header with-border"><h3 class="box-title">
 	    <span class="fa fa-tags"></span>TABEL ATAP</h3>
+
+        <div class="pull-right box-tools">
+
+            <?= Html::a('<i class="fa fa-upload"></i> Import Data', ['atap/import/'] ,['class'=>'btn btn-info btn-sm', 'style'=> 'vertical-align:middle',]) ?>
+        </div>
 	</div>
     
     <div class="box-body">	

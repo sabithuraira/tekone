@@ -20,7 +20,7 @@ $form = ActiveForm::begin([
 
 <div class="box box-default">
 	<div class="box-header with-border"><h3 class="box-title">
-		<span class="fa fa-upload"></span>Input Data ATAP</h3>
+		<span class="fa fa-upload"></span> Input Data ATAP</h3>
 	</div>
 	
 	<div class="box-body">	

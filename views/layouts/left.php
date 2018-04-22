@@ -118,16 +118,15 @@
                         'items' => [
                             ['label' => 'Data', 'icon' => 'fa fa-user', 'url' => ['/site/inputdata'],],
                             ['label' => 'Fenomena', 'icon' => 'fa fa-wrench', 'url' => ['/site/fenomena'],],
-
-                            [
-                                'label' => 'Series Data',
-                                'icon' => 'fa fa-group',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'ATAP', 'icon' => 'fa fa-circle-o', 'url' => ['atap/index'],],
-                                    ['label' => 'Fenomena', 'icon' => 'fa fa-wrench', 'url' => ['/site/fenomena'],],
-                                ],
-                            ],
+                        ],
+                    ],
+                    [
+                        'label' => 'Series Data',
+                        'icon' => 'fa  fa-line-chart',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'ATAP', 'icon' => 'fa fa-circle-o', 'url' => ['atap/index'],],
+                            ['label' => 'ASEM', 'icon' => 'fa fa-circle-o', 'url' => ['asem/index'],],
                         ],
                     ],
 					[

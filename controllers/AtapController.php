@@ -49,11 +49,6 @@ class AtapController extends Controller
             'id_wil'    =>$wil
         ]);
 
-        // $searchModel->id_tahun = $tahun;
-        // $searchModel->id_wil = $wil;
-
-        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -124,11 +119,19 @@ class AtapController extends Controller
                     $cur_col = $cols[$i - 1];
 
                     if(!empty($sheetData[4][$cur_col])){
-                        $model = new \app\models\Atap();
-                        $model->id_tahun = $th;
-                        $model->id_wil = $kab;
-                        $model->id_satuan = 2;
-                        $model->subround = $i;
+                        $model = Atap::findone([
+                            'id_tahun'  =>  $th,
+                            'id_wil'    =>  $kab,
+                            'subround'  =>  $i
+                        ]);
+
+                        if($model==null){
+                            $model = new \app\models\Atap();
+                            $model->id_tahun = $th;
+                            $model->id_wil = $kab;
+                            $model->id_satuan = 2;
+                            $model->subround = $i;
+                        }
 
                         $model->padisawah = $this->floatvalue($sheetData[4][$cur_col]);
                         $model->padiladang = $this->floatvalue($sheetData[5][$cur_col]);
