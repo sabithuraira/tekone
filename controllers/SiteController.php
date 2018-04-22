@@ -131,9 +131,9 @@ class SiteController extends Controller
 		    
 	public function actionInputdata()
     {
-	$input = new \app\models\inputd();
-	$model = new \app\models\tahun();
-$field = [
+        $input = new \app\models\inputd();
+        $model = new \app\models\tahun();
+        $field = [
             'fileImport' => 'File Import',
         ];
         $modelImport = new \yii\base\DynamicModel($field);

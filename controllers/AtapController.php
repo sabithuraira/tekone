@@ -74,27 +74,44 @@ class AtapController extends Controller
         }
     }
 	
-				    public function actionImport()
+	public function actionImport()
     {
-$field = [
+        $input = new \app\models\inputd();
+        $model = new \app\models\tahun();
+        $field = [
             'fileImport' => 'File Import',
         ];
         
         $modelImport = new \yii\base\DynamicModel($field);
 		$modelImport->addRule(['fileImport'], 'required');
 		$modelImport->addRule(['fileImport'], 'file', ['extensions'=>'xls,xlsx'],['maxSize'=>1024*1024]);
+        
         if (Yii::$app->request->post()) {
+			$th = $_POST['Inputd']['tahun'];
+			$kab = $_POST['Inputd']['tw'];
+
             $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
             if ($modelImport->fileImport ) {                                
                 $inputFileType = \PHPExcel_IOFactory::identify($modelImport->fileImport->tempName );
                 $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($modelImport->fileImport->tempName);
                 $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-                $baseRow = 3;
-                while(!empty($sheetData[$baseRow]['A'])){
+                
+                $cols = array('B', 'C', 'D');
+                for($i=1;$i<=3;++$i){
+                    $cur_col = $cols[$i - 1];
+                    
+                    if(!empty($sheetData[4]['B'])){
+                    
+                    }
+                }
+                
+                $baseRow = 4;
+                while(!empty($sheetData[$baseRow]['B'])){
+                    
                     $model = new \app\models\Atap();
-                    $model->id_tahun = $sheetData[$baseRow]['A'];
-					$model->id_wil = $sheetData[$baseRow]['B'];
+                    $model->id_tahun = $th;
+					$model->id_wil = $kab;
                     $model->padisawah = $sheetData[$baseRow]['C'];
                     $model->padiladang = $sheetData[$baseRow]['D'];
                     $model->padi = $sheetData[$baseRow]['E'];
@@ -120,8 +137,12 @@ $field = [
 			return $this->redirect(['atap/index']);
         }
         
-        return $this->render('import',[
-		'modelImport' => $modelImport,]);
+        return $this->render('import',
+            [
+                'model' => $input,
+                'modelImport' => $modelImport,
+            ]
+        );
     }	
 
 

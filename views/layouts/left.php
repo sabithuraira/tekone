@@ -110,7 +110,7 @@
 		$menuItems = [
                     ['label' => 'Menu Kuesioner', 'options' => ['class' => 'header']],
                     ['label' => 'Profil', 'icon' => 'fa fa-user', 'url' => ['/site/profil']],
-                    
+                    ['label' => 'Panduan', 'icon' => 'fa fa-sticky-note', 'url' => \yii\helpers\Url::to('@web/excel/panduan.pdf')],
                     [
                         'label' => 'Input',
                         'icon' => 'fa fa-group',
@@ -118,6 +118,16 @@
                         'items' => [
                             ['label' => 'Data', 'icon' => 'fa fa-user', 'url' => ['/site/inputdata'],],
                             ['label' => 'Fenomena', 'icon' => 'fa fa-wrench', 'url' => ['/site/fenomena'],],
+
+                            [
+                                'label' => 'Series Data',
+                                'icon' => 'fa fa-group',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'ATAP', 'icon' => 'fa fa-circle-o', 'url' => ['atap/index'],],
+                                    ['label' => 'Fenomena', 'icon' => 'fa fa-wrench', 'url' => ['/site/fenomena'],],
+                                ],
+                            ],
                         ],
                     ],
 					[
@@ -129,7 +139,7 @@
                             //['label' => 'Infografis', 'icon' => 'fa fa-wrench', 'url' => ['/site/infografis'],],
                         ],
                     ],
-					                    [
+					[
                         'label' => 'Analisis',
                         'icon' => 'fa fa-tint',
                         'url' => '#',

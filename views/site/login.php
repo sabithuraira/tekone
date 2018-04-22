@@ -22,7 +22,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-      <a href="#"><b><font color="red">FOR</font>um <font color="red">TE</font>mu E<font color="red">K</font>onomi  tri<font color="red">W</font>ulan<font color="red">AN</font> (FOR_TEKWAN) </br> SUMATERA SELATAN</b> ONLINE</a>  
+      <a href="#"><b>FORUM <font color="red">TE</font>mu E<font color="red">K</font>onomi  <font color="red">T</font>RI<font color="red">W</font>ULAN<font color="red">AN</font> (TEKWAN) </br> SUMATERA SELATAN</b> ONLINE</a>  
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
