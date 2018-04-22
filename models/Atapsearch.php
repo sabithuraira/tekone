@@ -33,6 +33,11 @@ class Atapsearch extends Atap
         return Model::scenarios();
     }
 
+    // public function getPerTahun(){
+    //     $sql = "";
+    //     return Yii::$app->db->createCommand('SELECT * FROM post')->queryAll();
+    // }
+
     /**
      * Creates data provider instance with search query applied
      *

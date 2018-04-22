@@ -36,7 +36,23 @@ class AtapController extends Controller
     public function actionIndex()
     {
         $searchModel = new Atapsearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $tahun = date('Y');
+        $wil = '1601';
+
+        if (Yii::$app->request->post()) {
+            $tahun = $_POST['Atapsearch']['id_tahun'];
+            $wil = $_POST['Atapsearch']['id_wil'];
+        }
+
+        $dataProvider = Atap::findAll([
+            'id_tahun'  => $tahun,
+            'id_wil'    =>$wil
+        ]);
+
+        // $searchModel->id_tahun = $tahun;
+        // $searchModel->id_wil = $wil;
+
+        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -73,7 +89,13 @@ class AtapController extends Controller
             ]);
         }
     }
-	
+    
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
+    }
+
 	public function actionImport()
     {
         $input = new \app\models\inputd();
@@ -88,7 +110,7 @@ class AtapController extends Controller
         
         if (Yii::$app->request->post()) {
 			$th = $_POST['Inputd']['tahun'];
-			$kab = $_POST['Inputd']['tw'];
+			$kab = $_POST['Inputd']['kab'];
 
             $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
             if ($modelImport->fileImport ) {                                
@@ -100,36 +122,31 @@ class AtapController extends Controller
                 $cols = array('B', 'C', 'D');
                 for($i=1;$i<=3;++$i){
                     $cur_col = $cols[$i - 1];
-                    
-                    if(!empty($sheetData[4]['B'])){
-                    
+
+                    if(!empty($sheetData[4][$cur_col])){
+                        $model = new \app\models\Atap();
+                        $model->id_tahun = $th;
+                        $model->id_wil = $kab;
+                        $model->id_satuan = 2;
+                        $model->subround = $i;
+
+                        $model->padisawah = $this->floatvalue($sheetData[4][$cur_col]);
+                        $model->padiladang = $this->floatvalue($sheetData[5][$cur_col]);
+                        $model->padi = $this->floatvalue($sheetData[6][$cur_col]);
+                        $model->jagung = $this->floatvalue($sheetData[7][$cur_col]);
+                        $model->kedelai = $this->floatvalue($sheetData[8][$cur_col]);
+                        $model->kacangtanah = $this->floatvalue($sheetData[9][$cur_col]);
+                        $model->kacanghijau = $this->floatvalue($sheetData[10][$cur_col]);
+                        $model->ubijalar = $this->floatvalue($sheetData[11][$cur_col]);
+                        $model->ubikayu = $this->floatvalue($sheetData[12][$cur_col]);
+
+                        $model->save(); 
+
+                        // die(print_r($model));
                     }
                 }
                 
-                $baseRow = 4;
-                while(!empty($sheetData[$baseRow]['B'])){
-                    
-                    $model = new \app\models\Atap();
-                    $model->id_tahun = $th;
-					$model->id_wil = $kab;
-                    $model->padisawah = $sheetData[$baseRow]['C'];
-                    $model->padiladang = $sheetData[$baseRow]['D'];
-                    $model->padi = $sheetData[$baseRow]['E'];
-                    $model->jagung = $sheetData[$baseRow]['F'];
-                    $model->kedelai = $sheetData[$baseRow]['G'];
-                    $model->kacangtanah = $sheetData[$baseRow]['H'];
-                    $model->kacanghijau = $sheetData[$baseRow]['I'];
-                    $model->ubijalar = $sheetData[$baseRow]['J'];
-                    $model->ubikayu = $sheetData[$baseRow]['K'];
-                    $model->fenomena = $sheetData[$baseRow]['L'];
-                    $model->id_satuan = 2;
-
-                    $model->save(); 
-                    //die(print_r($model->errors));
-                    $baseRow++;
-                }
-				$b = $baseRow-3;
-                Yii::$app->getSession()->setFlash('success','Sebanyak '.$b.' baris data berhasil diupload');
+                Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
             }
             else{
                 Yii::$app->getSession()->setFlash('error', 'Error');
