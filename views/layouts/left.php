@@ -127,6 +127,7 @@
                         'items' => [
                             ['label' => 'ATAP', 'icon' => 'fa fa-circle-o', 'url' => ['atap/index'],],
                             ['label' => 'ASEM', 'icon' => 'fa fa-circle-o', 'url' => ['asem/index'],],
+                            ['label' => 'ARAM', 'icon' => 'fa fa-circle-o', 'url' => ['aram/index'],],
                         ],
                     ],
 					[

@@ -44,6 +44,9 @@ class AtapController extends Controller
             $wil = $_POST['Atapsearch']['id_wil'];
         }
 
+        $searchModel->id_tahun = $tahun;
+        $searchModel->id_wil = $wil;
+        
         $dataProvider = Atap::findAll([
             'id_tahun'  => $tahun,
             'id_wil'    =>$wil
@@ -93,8 +96,8 @@ class AtapController extends Controller
 
 	public function actionImport()
     {
-        $input = new \app\models\inputd();
-        $model = new \app\models\tahun();
+        $input = new \app\models\Inputd();
+        $model = new \app\models\Tahun();
         $field = [
             'fileImport' => 'File Import',
         ];

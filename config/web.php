@@ -23,7 +23,7 @@ $config = [
  
         // the global settings for the disqus widget
         'disqus' => [
-            'settings' => ['shortname' => 'tekone'] // default settings
+            'settings' => ['shortname' => 'tekwan'] // default settings
         ],
 		],
     'mimin' => [

@@ -71,7 +71,7 @@ class SiteController extends Controller
     }
 		    public function actionTabelpokok()
 			{
-	$input = new \app\models\inputd();
+	$input = new \app\models\Inputd();
 	        if (Yii::$app->request->post()) {
 			$th = $_POST['Inputd']['tahun'];
 			$tw = $_POST['Inputd']['tw'];
@@ -131,8 +131,8 @@ class SiteController extends Controller
 		    
 	public function actionInputdata()
     {
-        $input = new \app\models\inputd();
-        $model = new \app\models\tahun();
+        $input = new \app\models\Inputd();
+        $model = new \app\models\Tahun();
         $field = [
             'fileImport' => 'File Import',
         ];
@@ -233,12 +233,12 @@ class SiteController extends Controller
 	
    	public function actionProfil()
     {
-        return $this->render('Profil');
+        return $this->render('profil');
     }
             
     public function actionTabelFenomena()
 	{
-        $input = new \app\models\inputd();
+        $input = new \app\models\Inputd();
         
         if (Yii::$app->request->post()) {
             $th = $_POST['Inputd']['tahun'];
@@ -271,8 +271,8 @@ class SiteController extends Controller
 	
 public function actionDataSeries()
     {
-		 $input = new \app\models\inputd();
-		$model = new \app\models\tahun();
+		 $input = new \app\models\Inputd();
+		$model = new \app\models\Tahun();
 		$jumlaht = 1;
 		$tabelcount = \app\models\PdrbPengeluaranTd2010AdhBerlaku::find()->count();
 		$tabel1 = \app\models\PdrbPengeluaranTd2010AdhBerlaku::find()->limit($jumlaht)->offset($tabelcount-$jumlaht)->orderBy([
@@ -333,8 +333,8 @@ return $this->render('data-series', [
 	
       		public function actionFenomena()
     {
-        $input = new \app\models\inputd();
-		$model = new \app\models\tahun();
+        $input = new \app\models\Inputd();
+		$model = new \app\models\Tahun();
 		$field = [
             'fileImport' => 'File Import',
         ];
