@@ -144,14 +144,14 @@ class SiteController extends Controller
 			$tw = $_POST['Inputd']['tw'];
 			$judul = $_POST['Inputd']['judul'];
 			
-	$tabel1 = \app\models\PdrbPengeluaranTd2010AdhBerlaku::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel2 = \app\models\PdrbPengeluaranTd2010AdhKonstan::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel3 = \app\models\DistribusiPdrbPengeluaranTd2010AdhBerlaku::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel4 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanQtoq::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel5 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanYtoy::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel6 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanCtoc::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel7 = \app\models\IndeksImplisit::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
-	$tabel8 = \app\models\LajuPertumbuhanIndeksImplisit::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel1 = \app\models\PdrbPengeluaranTd2010AdhBerlaku::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel2 = \app\models\PdrbPengeluaranTd2010AdhKonstan::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel3 = \app\models\DistribusiPdrbPengeluaranTd2010AdhBerlaku::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel4 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanQtoq::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel5 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanYtoy::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel6 = \app\models\PertumbuhanPdrbPengeluaranTd2010AdhKonstanCtoc::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel7 = \app\models\IndeksImplisit::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
+            $tabel8 = \app\models\LajuPertumbuhanIndeksImplisit::find()->where(['tahun' => $th,'triwulan' => $tw,])->one();
 	
             $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
             if ($modelImport->fileImport ) {                                
@@ -162,8 +162,13 @@ class SiteController extends Controller
 				
                 if(!empty($sheetData[4]['B'])){
 					if($judul==1){ 
-					if(empty($tabel1)) $model = new \app\models\PdrbPengeluaranTd2010AdhBerlaku();
-					else $model=$tabel1;}
+					    if(empty($tabel1)) {
+                            $model = new \app\models\PdrbPengeluaranTd2010AdhBerlaku();
+                        }
+                        else{ 
+                            $model=$tabel1;
+                        }
+                    }
 					else if($judul==2){ 
 					if(empty($tabel1))  $model = new \app\models\PdrbPengeluaranTd2010AdhKonstan();
 					else $model=$tabel2;}

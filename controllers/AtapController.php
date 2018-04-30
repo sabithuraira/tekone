@@ -47,10 +47,16 @@ class AtapController extends Controller
         $searchModel->id_tahun = $tahun;
         $searchModel->id_wil = $wil;
         
-        $dataProvider = Atap::findAll([
-            'id_tahun'  => $tahun,
-            'id_wil'    =>$wil
-        ]);
+        // $dataProvider = Atap::findAll([
+        //     'id_tahun'  => $tahun,
+        //     'id_wil'    =>$wil
+        // ]);
+
+
+        $dataProvider = Atap::find()
+            ->where(['id_tahun' => $tahun,'id_wil' => $wil])
+            ->orderBy(['subround'=>SORT_ASC])
+            ->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -121,7 +127,7 @@ class AtapController extends Controller
                 for($i=1;$i<=3;++$i){
                     $cur_col = $cols[$i - 1];
 
-                    if(!empty($sheetData[4][$cur_col])){
+                    //if(!empty($sheetData[4][$cur_col])){
                         $model = Atap::findone([
                             'id_tahun'  =>  $th,
                             'id_wil'    =>  $kab,
@@ -143,13 +149,13 @@ class AtapController extends Controller
                         $model->kedelai = $this->floatvalue($sheetData[8][$cur_col]);
                         $model->kacangtanah = $this->floatvalue($sheetData[9][$cur_col]);
                         $model->kacanghijau = $this->floatvalue($sheetData[10][$cur_col]);
-                        $model->ubijalar = $this->floatvalue($sheetData[11][$cur_col]);
-                        $model->ubikayu = $this->floatvalue($sheetData[12][$cur_col]);
+                        $model->ubikayu = $this->floatvalue($sheetData[11][$cur_col]);
+                        $model->ubijalar = $this->floatvalue($sheetData[12][$cur_col]);
 
                         $model->save(); 
 
                         // die(print_r($model));
-                    }
+                    //}
                 }
                 
                 Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
