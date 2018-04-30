@@ -29,6 +29,76 @@ class NtpController extends Controller
         ];
     }
 
+
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
+    }
+
+    public function actionImport()
+    {
+        $input = new \app\models\Inputd();
+        $model = new \app\models\Tahun();
+        $ntp_model = new \app\models\Ntpsearch();
+        $field = [
+            'fileImport' => 'File Import',
+        ];
+        
+        $modelImport = new \yii\base\DynamicModel($field);
+		$modelImport->addRule(['fileImport'], 'required');
+		$modelImport->addRule(['fileImport'], 'file', ['extensions'=>'xls,xlsx'],['maxSize'=>1024*1024]);
+        
+        if (Yii::$app->request->post()) {
+			$th = $_POST['Inputd']['tahun'];
+			$subsektor = $_POST['Inputd']['kab'];
+
+            $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
+            if ($modelImport->fileImport ) {                                
+                $inputFileType = \PHPExcel_IOFactory::identify($modelImport->fileImport->tempName );
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($modelImport->fileImport->tempName);
+                $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+                
+                for($i=1;$i<=12;++$i){
+                    $model = Ntp::findone([
+                        'id_tahun'  =>  $th,
+                        'id_subsektor'  =>  $subsektor,
+                        'id_bulan'  =>  $i
+                    ]);
+
+                    if($model==null){
+                        $model = new \app\models\Ntp();
+                        $model->id_tahun = $th;
+                        $model->id_subsektor = $subsektor;
+                        $model->id_bulan = $i;
+                    }
+
+                    $model->it = $this->floatvalue($sheetData[$i+2]['B']);
+                    $model->ib = $this->floatvalue($sheetData[$i+2]['C']);
+                    $model->ntp = $this->floatvalue($sheetData[$i+2]['D']);
+
+                    $model->save(); 
+
+                }
+                
+                Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
+            }
+            else{
+                Yii::$app->getSession()->setFlash('error', 'Error');
+            }
+			return $this->redirect(['ntp/index']);
+        }
+        
+        return $this->render('import',
+            [
+                'model' => $input,
+                'modelImport' => $modelImport,
+                'ntp_model' => $ntp_model,
+            ]
+        );
+    }	
+
     /**
      * Lists all Ntp models.
      * @return mixed
@@ -36,7 +106,27 @@ class NtpController extends Controller
     public function actionIndex()
     {
         $searchModel = new Ntpsearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $tahun = date('Y');
+        $subsektor = 1;
+
+        if (Yii::$app->request->post()) {
+            $tahun = $_POST['Ntpsearch']['id_tahun'];
+            $subsektor = $_POST['Ntpsearch']['id_subsektor'];
+        }
+
+        $searchModel->id_tahun = $tahun;
+        $searchModel->id_subsektor = $subsektor;
+
+        // $dataProvider = Aram::findAll([
+        //     'id_tahun'  => $tahun,
+        //     'id_wil'    =>$wil
+        // ]);
+
+
+        $dataProvider = Ntp::find()
+            ->where(['id_tahun' => $tahun,'id_subsektor' => $subsektor])
+            ->orderBy(['id_bulan'=>SORT_ASC])
+            ->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,

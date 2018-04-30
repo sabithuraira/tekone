@@ -24,6 +24,16 @@ class Ntpsearch extends Ntp
         ];
     }
 
+    public function getSubsektorList(){
+        return [
+            1 => 'Tanaman Pangan', 
+            2 => 'Hortikultura', 
+            3 => 'Tanaman Perkebunan', 
+            4 => 'Peternakan',
+            5 => 'Perikanan'
+        ];
+    }
+
     /**
      * @inheritdoc
      */

@@ -35,6 +35,16 @@ class Ntp extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getSubsektorList(){
+        return [
+            1 => 'Tanaman Pangan', 
+            2 => 'Hortikultura', 
+            3 => 'Tanaman Perkebunan', 
+            4 => 'Peternakan',
+            5 => 'Perikanan'
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -43,7 +53,7 @@ class Ntp extends \yii\db\ActiveRecord
         return [
             [['it', 'ib', 'ntp'], 'number'],
             [['fenomena'], 'string'],
-            [['id_bulan', 'id_satuan', 'id_tahun'], 'required'],
+            [['id_bulan', 'id_tahun'], 'required'],
             [['id_bulan', 'id_satuan', 'id_tahun', 'created_at', 'updated_at'], 'integer'],
         ];
     }
