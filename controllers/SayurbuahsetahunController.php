@@ -1,6 +1,5 @@
 <?php
-
-namespace app\Controllers;
+namespace app\controllers;
 
 use Yii;
 use app\models\Sayurbuahsetahun;
@@ -29,6 +28,92 @@ class SayurbuahsetahunController extends Controller
         ];
     }
 
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
+    }
+
+    public function actionImport()
+    {
+        $input = new \app\models\Inputd();
+        $model = new \app\models\Tahun();
+        $field = [
+            'fileImport' => 'File Import',
+        ];
+        
+        $modelImport = new \yii\base\DynamicModel($field);
+		$modelImport->addRule(['fileImport'], 'required');
+		$modelImport->addRule(['fileImport'], 'file', ['extensions'=>'xls,xlsx'],['maxSize'=>1024*1024]);
+        
+        if (Yii::$app->request->post()) {
+			$th = $_POST['Inputd']['tahun'];
+			$kab = $_POST['Inputd']['kab'];
+
+            $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
+            if ($modelImport->fileImport ) {                                
+                $inputFileType = \PHPExcel_IOFactory::identify($modelImport->fileImport->tempName );
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($modelImport->fileImport->tempName);
+                $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+                
+
+                $model = Sayurbuahsetahun::findone([
+                    'id_tahun'  =>  $th,
+                    'id_wil'    =>  $kab
+                ]);
+
+                if($model==null){
+                    $model = new \app\models\Sayurbuahsetahun();
+                    $model->id_tahun = $th;
+                    $model->id_wil = $kab;
+                    $model->id_satuan = 2;
+                }
+
+                $model->alpukat = $this->floatvalue($sheetData[2]['B']);
+                $model->belimbing = $this->floatvalue($sheetData[3]['B']);
+                $model->duku_langsat = $this->floatvalue($sheetData[4]['B']);
+                $model->durian = $this->floatvalue($sheetData[5]['B']);
+                $model->jambu_biji = $this->floatvalue($sheetData[6]['B']);
+                $model->jambu_air = $this->floatvalue($sheetData[7]['B']);
+                $model->jeruk_siam_keprok = $this->floatvalue($sheetData[8]['B']);
+                $model->jeruk_besar = $this->floatvalue($sheetData[9]['B']);
+                $model->mangga = $this->floatvalue($sheetData[10]['B']);
+                $model->manggis = $this->floatvalue($sheetData[11]['B']);
+                $model->nangka_cempedak = $this->floatvalue($sheetData[12]['B']);
+                $model->nenas = $this->floatvalue($sheetData[13]['B']);
+                $model->pepaya = $this->floatvalue($sheetData[14]['B']);
+                $model->pisang = $this->floatvalue($sheetData[15]['B']);
+                $model->rambutan = $this->floatvalue($sheetData[16]['B']);
+                $model->salak = $this->floatvalue($sheetData[17]['B']);
+                $model->sawo = $this->floatvalue($sheetData[18]['B']);
+                $model->markisa_konyal = $this->floatvalue($sheetData[19]['B']);
+                $model->sirsak = $this->floatvalue($sheetData[20]['B']);
+                $model->sukun = $this->floatvalue($sheetData[21]['B']);
+                $model->melinjo = $this->floatvalue($sheetData[22]['B']);
+                $model->petai = $this->floatvalue($sheetData[23]['B']);
+                $model->jengkol = $this->floatvalue($sheetData[24]['B']);
+                $model->lainnya = $this->floatvalue($sheetData[25]['B']);
+
+                $model->save(); 
+
+                
+                Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
+            }
+            else{
+                Yii::$app->getSession()->setFlash('error', 'Error');
+            }
+			return $this->redirect(['sayurbuahsetahun/index']);
+        }
+        
+        return $this->render('import',
+            [
+                'model' => $input,
+                'modelImport' => $modelImport,
+            ]
+        );
+    }	
+
     /**
      * Lists all Sayurbuahsetahun models.
      * @return mixed
@@ -36,7 +121,20 @@ class SayurbuahsetahunController extends Controller
     public function actionIndex()
     {
         $searchModel = new Sayurbuahsetahunsearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $tahun = date('Y');
+        $wil = '1601';
+
+        if (Yii::$app->request->post()) {
+            $tahun = $_POST['Sayurbuahsetahunsearch']['id_tahun'];
+            $wil = $_POST['Sayurbuahsetahunsearch']['id_wil'];
+        }
+
+        $searchModel->id_tahun = $tahun;
+        $searchModel->id_wil = $wil;
+
+        $dataProvider = Sayurbuahsetahun::find()
+            ->where(['id_tahun' => $tahun,'id_wil' => $wil])
+            ->one();
 
         return $this->render('index', [
             'searchModel' => $searchModel,

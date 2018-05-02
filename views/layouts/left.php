@@ -129,6 +129,14 @@
                             ['label' => 'ASEM', 'icon' => 'fa fa-circle-o', 'url' => ['asem/index'],],
                             ['label' => 'ARAM', 'icon' => 'fa fa-circle-o', 'url' => ['aram/index'],],
                             ['label' => 'NTP', 'icon' => 'fa fa-circle-o', 'url' => ['ntp/index'],],
+                            [
+                                'label' => 'Hortikultura', 'icon' => 'fa fa-circle-o', 'url' => '#',
+                                'items' => [
+                                    ['label' => 'Buahan', 'icon' => 'fa fa-circle-o', 'url' => ['sayurbuahsetahun/index'],],
+                                    ['label' => 'Sayuran', 'icon' => 'fa fa-circle-o', 'url' => ['sayurbuahsemusim/index'],],
+                                ],
+                            ],
+                            ['label' => 'Perkebunan', 'icon' => 'fa fa-circle-o', 'url' => ['ntp/index'],],
                         ],
                     ],
 					[

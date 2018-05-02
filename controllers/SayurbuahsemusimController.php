@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Controllers;
+namespace app\controllers;
 
 use Yii;
 use app\models\Sayurbuahsemusim;
@@ -29,20 +29,107 @@ class SayurbuahsemusimController extends Controller
         ];
     }
 
-    /**
-     * Lists all Sayurbuahsemusim models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new Sayurbuahsemusimsearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
     }
+
+    public function actionImport()
+    {
+        $input = new \app\models\Inputd();
+        $model = new \app\models\Tahun();
+        $field = [
+            'fileImport' => 'File Import',
+        ];
+        
+        $modelImport = new \yii\base\DynamicModel($field);
+		$modelImport->addRule(['fileImport'], 'required');
+		$modelImport->addRule(['fileImport'], 'file', ['extensions'=>'xls,xlsx'],['maxSize'=>1024*1024]);
+        
+        if (Yii::$app->request->post()) {
+			$th = $_POST['Inputd']['tahun'];
+			$kab = $_POST['Inputd']['kab'];
+
+            $modelImport->fileImport = \yii\web\UploadedFile::getInstance($modelImport, 'fileImport');
+            if ($modelImport->fileImport ) {                                
+                $inputFileType = \PHPExcel_IOFactory::identify($modelImport->fileImport->tempName );
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($modelImport->fileImport->tempName);
+                $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+                
+
+                $model = Sayurbuahsemusim::findone([
+                    'id_tahun'  =>  $th,
+                    'id_wil'    =>  $kab
+                ]);
+
+                if($model==null){
+                    $model = new \app\models\Sayurbuahsemusim();
+                    $model->id_tahun = $th;
+                    $model->id_wil = $kab;
+                    $model->id_satuan = 2;
+                }
+
+                $model->bawang_merah = $this->floatvalue($sheetData[2]['B']);
+                $model->bawang_putih = $this->floatvalue($sheetData[3]['B']);
+                $model->bawang_daun = $this->floatvalue($sheetData[4]['B']);
+                $model->kentang_ = $this->floatvalue($sheetData[5]['B']);
+                $model->kubis = $this->floatvalue($sheetData[6]['B']);
+                $model->kembang_kol = $this->floatvalue($sheetData[7]['B']);
+                $model->petsaisawi = $this->floatvalue($sheetData[8]['B']);
+                $model->wortel = $this->floatvalue($sheetData[9]['B']);
+                $model->lobak = $this->floatvalue($sheetData[10]['B']);
+                $model->kacang_merah = $this->floatvalue($sheetData[11]['B']);
+                $model->kacang_panjang = $this->floatvalue($sheetData[12]['B']);
+                $model->cabe_besar = $this->floatvalue($sheetData[13]['B']);
+                $model->cabe_rawit = $this->floatvalue($sheetData[14]['B']);
+                $model->paprika = $this->floatvalue($sheetData[15]['B']);
+                $model->jamur = $this->floatvalue($sheetData[16]['B']);
+                $model->tomat = $this->floatvalue($sheetData[17]['B']);
+                $model->terung = $this->floatvalue($sheetData[18]['B']);
+                $model->buncis = $this->floatvalue($sheetData[19]['B']);
+                $model->ketimun = $this->floatvalue($sheetData[20]['B']);
+                $model->labu_siam = $this->floatvalue($sheetData[21]['B']);
+                $model->kangkung = $this->floatvalue($sheetData[22]['B']);
+                $model->bayam = $this->floatvalue($sheetData[23]['B']);
+                $model->lainnya = $this->floatvalue($sheetData[24]['B']);
+
+                $model->save(); 
+
+                
+                Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
+            }
+            else{
+                Yii::$app->getSession()->setFlash('error', 'Error');
+            }
+			return $this->redirect(['sayurbuahsetahun/index']);
+        }
+    }
+
+     public function actionIndex()
+     {
+         $searchModel = new Sayurbuahsemusimsearch();
+         $tahun = date('Y');
+         $wil = '1601';
+ 
+         if (Yii::$app->request->post()) {
+             $tahun = $_POST['Sayurbuahsemusimsearch']['id_tahun'];
+             $wil = $_POST['Sayurbuahsesemusimsearch']['id_wil'];
+         }
+ 
+         $searchModel->id_tahun = $tahun;
+         $searchModel->id_wil = $wil;
+ 
+         $dataProvider = Sayurbuahsemusim::find()
+             ->where(['id_tahun' => $tahun,'id_wil' => $wil])
+             ->one();
+ 
+         return $this->render('index', [
+             'searchModel' => $searchModel,
+             'dataProvider' => $dataProvider,
+         ]);
+     }
 
     /**
      * Displays a single Sayurbuahsemusim model.

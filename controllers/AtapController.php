@@ -46,12 +46,6 @@ class AtapController extends Controller
 
         $searchModel->id_tahun = $tahun;
         $searchModel->id_wil = $wil;
-        
-        // $dataProvider = Atap::findAll([
-        //     'id_tahun'  => $tahun,
-        //     'id_wil'    =>$wil
-        // ]);
-
 
         $dataProvider = Atap::find()
             ->where(['id_tahun' => $tahun,'id_wil' => $wil])
