@@ -43,6 +43,13 @@ class Perkebunantahunan extends \yii\db\ActiveRecord
         return 'perkebunantahunan';
     }
 
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */

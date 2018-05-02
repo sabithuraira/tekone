@@ -105,6 +105,13 @@ class SayurbuahsemusimController extends Controller
             }
 			return $this->redirect(['sayurbuahsetahun/index']);
         }
+        
+        return $this->render('import',
+            [
+                'model' => $input,
+                'modelImport' => $modelImport,
+            ]
+        );
     }
 
      public function actionIndex()

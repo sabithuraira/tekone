@@ -136,7 +136,7 @@
                                     ['label' => 'Sayuran', 'icon' => 'fa fa-circle-o', 'url' => ['sayurbuahsemusim/index'],],
                                 ],
                             ],
-                            ['label' => 'Perkebunan', 'icon' => 'fa fa-circle-o', 'url' => ['ntp/index'],],
+                            ['label' => 'Perkebunan', 'icon' => 'fa fa-circle-o', 'url' => ['perkebunantahunan/index'],],
                         ],
                     ],
 					[
