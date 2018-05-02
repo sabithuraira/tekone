@@ -66,8 +66,6 @@ class PerkebunantahunanController extends Controller
                     'id_wil'    =>  $kab
                 ]);
 
-                // print_r($sheetData);die();
-
                 if($model==null){
                     $model = new \app\models\Perkebunantahunan();
                     $model->id_tahun = $th;
@@ -78,21 +76,22 @@ class PerkebunantahunanController extends Controller
                 $model->karet = $this->floatvalue($sheetData[2]['B']);
                 $model->kelapa_dalam = $this->floatvalue($sheetData[3]['B']);
                 $model->kelapa_sawit = $this->floatvalue($sheetData[4]['B']);
-                $model->kakao = $this->floatvalue($sheetData[5]['B']);
+                $model->kopi = $this->floatvalue($sheetData[5]['B']);
                 $model->lada = $this->floatvalue($sheetData[6]['B']);
-                $model->kopi = $this->floatvalue($sheetData[7]['B']);
-                $model->cengkeh = $this->floatvalue($sheetData[8]['B']);
-                $model->pala = $this->floatvalue($sheetData[9]['B']);
-                $model->kemiri = $this->floatvalue($sheetData[10]['B']);
-                $model->kayu_manis = $this->floatvalue($sheetData[11]['B']);
-                $model->aren = $this->floatvalue($sheetData[12]['B']);
-                $model->kapok = $this->floatvalue($sheetData[13]['B']);
-                $model->jambu_mete = $this->floatvalue($sheetData[14]['B']);
-                $model->panili = $this->floatvalue($sheetData[15]['B']);
-                $model->nipah = $this->floatvalue($sheetData[16]['B']);
-                $model->pinang = $this->floatvalue($sheetData[17]['B']);
-                $model->sagu_ = $this->floatvalue($sheetData[18]['B']);
-                $model->lainnya = $this->floatvalue($sheetData[19]['B']);
+                $model->kakao = $this->floatvalue($sheetData[7]['B']);
+                $model->kemiri = $this->floatvalue($sheetData[8]['B']);
+                $model->cengkeh = $this->floatvalue($sheetData[9]['B']);
+                $model->lainnya = $this->floatvalue($sheetData[10]['B']);
+
+                $model->pala = $this->floatvalue($sheetData[11]['B']);
+                $model->kayu_manis = $this->floatvalue($sheetData[12]['B']);
+                $model->aren = $this->floatvalue($sheetData[13]['B']);
+                $model->kapok = $this->floatvalue($sheetData[14]['B']);
+                $model->jambu_mete = $this->floatvalue($sheetData[15]['B']);
+                $model->panili = $this->floatvalue($sheetData[16]['B']);
+                $model->nipah = $this->floatvalue($sheetData[17]['B']);
+                $model->pinang = $this->floatvalue($sheetData[18]['B']);
+                $model->sagu_ = $this->floatvalue($sheetData[19]['B']);
 
                 $model->save(); 
 

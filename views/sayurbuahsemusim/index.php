@@ -22,7 +22,7 @@ $form = ActiveForm::begin();
 
         <div class="pull-right box-tools">
 
-            <?= Html::a('<i class="fa fa-upload"></i> Import Data', ['sayurbuahsetahun/import/'] ,['class'=>'btn btn-info btn-sm', 'style'=> 'vertical-align:middle',]) ?>
+            <?= Html::a('<i class="fa fa-upload"></i> Import Data', ['sayurbuahsemusim/import/'] ,['class'=>'btn btn-info btn-sm', 'style'=> 'vertical-align:middle',]) ?>
         </div>
 	</div>
     

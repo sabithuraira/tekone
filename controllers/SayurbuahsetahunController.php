@@ -70,20 +70,22 @@ class SayurbuahsetahunController extends Controller
                     $model->id_satuan = 2;
                 }
 
-                $model->alpukat = $this->floatvalue($sheetData[2]['B']);
-                $model->belimbing = $this->floatvalue($sheetData[3]['B']);
-                $model->duku_langsat = $this->floatvalue($sheetData[4]['B']);
-                $model->durian = $this->floatvalue($sheetData[5]['B']);
-                $model->jambu_biji = $this->floatvalue($sheetData[6]['B']);
-                $model->jambu_air = $this->floatvalue($sheetData[7]['B']);
-                $model->jeruk_siam_keprok = $this->floatvalue($sheetData[8]['B']);
-                $model->jeruk_besar = $this->floatvalue($sheetData[9]['B']);
-                $model->mangga = $this->floatvalue($sheetData[10]['B']);
-                $model->manggis = $this->floatvalue($sheetData[11]['B']);
-                $model->nangka_cempedak = $this->floatvalue($sheetData[12]['B']);
-                $model->nenas = $this->floatvalue($sheetData[13]['B']);
-                $model->pepaya = $this->floatvalue($sheetData[14]['B']);
-                $model->pisang = $this->floatvalue($sheetData[15]['B']);
+                $model->mangga = $this->floatvalue($sheetData[2]['B']);
+                $model->durian = $this->floatvalue($sheetData[3]['B']);
+                $model->jeruk_besar = $this->floatvalue($sheetData[4]['B']);
+                $model->pisang = $this->floatvalue($sheetData[5]['B']);
+                $model->pepaya = $this->floatvalue($sheetData[6]['B']);
+                $model->nenas = $this->floatvalue($sheetData[7]['B']);
+
+                $model->alpukat = $this->floatvalue($sheetData[8]['B']);
+                $model->belimbing = $this->floatvalue($sheetData[9]['B']);
+                $model->duku_langsat = $this->floatvalue($sheetData[10]['B']);
+                $model->jambu_biji = $this->floatvalue($sheetData[11]['B']);
+                $model->jambu_air = $this->floatvalue($sheetData[12]['B']);
+                $model->jeruk_siam_keprok = $this->floatvalue($sheetData[13]['B']);
+                $model->manggis = $this->floatvalue($sheetData[14]['B']);
+                $model->nangka_cempedak = $this->floatvalue($sheetData[15]['B']);
+
                 $model->rambutan = $this->floatvalue($sheetData[16]['B']);
                 $model->salak = $this->floatvalue($sheetData[17]['B']);
                 $model->sawo = $this->floatvalue($sheetData[18]['B']);

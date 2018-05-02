@@ -72,17 +72,20 @@ class SayurbuahsemusimController extends Controller
                 }
 
                 $model->bawang_merah = $this->floatvalue($sheetData[2]['B']);
-                $model->bawang_putih = $this->floatvalue($sheetData[3]['B']);
-                $model->bawang_daun = $this->floatvalue($sheetData[4]['B']);
-                $model->kentang_ = $this->floatvalue($sheetData[5]['B']);
-                $model->kubis = $this->floatvalue($sheetData[6]['B']);
-                $model->kembang_kol = $this->floatvalue($sheetData[7]['B']);
-                $model->petsaisawi = $this->floatvalue($sheetData[8]['B']);
-                $model->wortel = $this->floatvalue($sheetData[9]['B']);
-                $model->lobak = $this->floatvalue($sheetData[10]['B']);
-                $model->kacang_merah = $this->floatvalue($sheetData[11]['B']);
-                $model->kacang_panjang = $this->floatvalue($sheetData[12]['B']);
-                $model->cabe_besar = $this->floatvalue($sheetData[13]['B']);
+                $model->cabe_besar = $this->floatvalue($sheetData[3]['B']);
+                $model->kentang_ = $this->floatvalue($sheetData[4]['B']);
+                $model->kubis = $this->floatvalue($sheetData[5]['B']);
+                $model->petsaisawi = $this->floatvalue($sheetData[6]['B']);
+
+                $model->bawang_putih = $this->floatvalue($sheetData[7]['B']);
+                $model->bawang_daun = $this->floatvalue($sheetData[8]['B']);
+                
+                $model->kembang_kol = $this->floatvalue($sheetData[9]['B']);
+                $model->wortel = $this->floatvalue($sheetData[10]['B']);
+                $model->lobak = $this->floatvalue($sheetData[11]['B']);
+                $model->kacang_merah = $this->floatvalue($sheetData[12]['B']);
+                $model->kacang_panjang = $this->floatvalue($sheetData[13]['B']);
+
                 $model->cabe_rawit = $this->floatvalue($sheetData[14]['B']);
                 $model->paprika = $this->floatvalue($sheetData[15]['B']);
                 $model->jamur = $this->floatvalue($sheetData[16]['B']);
@@ -103,7 +106,7 @@ class SayurbuahsemusimController extends Controller
             else{
                 Yii::$app->getSession()->setFlash('error', 'Error');
             }
-			return $this->redirect(['sayurbuahsetahun/index']);
+			return $this->redirect(['sayurbuahsemusim/index']);
         }
         
         return $this->render('import',
