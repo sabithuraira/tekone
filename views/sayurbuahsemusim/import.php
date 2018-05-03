@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Input Data  Hortikultura Buahan';
+$this->title = 'Input Data  Hortikultura Sayuran';
 $this->params['breadcrumbs'][] = $this->title;
 $tahun = \app\models\Tahun::find()->all();
 $kab = \app\models\Kab::find()->all();
@@ -20,7 +20,7 @@ $form = ActiveForm::begin([
 
 <div class="box box-default">
 	<div class="box-header with-border"><h3 class="box-title">
-		<span class="fa fa-upload"></span> Input Data Hortikultura Buahan</h3>
+		<span class="fa fa-upload"></span> Input Data Hortikultura Sayuran</h3>
 	</div>
 	
 	<div class="box-body">	

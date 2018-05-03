@@ -48,6 +48,13 @@ class Sayurbuahsetahun extends \yii\db\ActiveRecord
     {
         return 'sayurbuahsetahun';
     }
+    
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
 
     /**
      * @inheritdoc

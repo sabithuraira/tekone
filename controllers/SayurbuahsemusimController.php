@@ -100,6 +100,7 @@ class SayurbuahsemusimController extends Controller
 
                 $model->save(); 
 
+                print_r($model);die();
                 
                 Yii::$app->getSession()->setFlash('success','Data berhasil diupload');
             }
@@ -125,7 +126,7 @@ class SayurbuahsemusimController extends Controller
  
          if (Yii::$app->request->post()) {
              $tahun = $_POST['Sayurbuahsemusimsearch']['id_tahun'];
-             $wil = $_POST['Sayurbuahsesemusimsearch']['id_wil'];
+             $wil = $_POST['Sayurbuahsemusimsearch']['id_wil'];
          }
  
          $searchModel->id_tahun = $tahun;
@@ -134,6 +135,10 @@ class SayurbuahsemusimController extends Controller
          $dataProvider = Sayurbuahsemusim::find()
              ->where(['id_tahun' => $tahun,'id_wil' => $wil])
              ->one();
+
+        // print_r($tahun);
+        // print_r($wil);
+        // print_r($dataProvider);die();
  
          return $this->render('index', [
              'searchModel' => $searchModel,

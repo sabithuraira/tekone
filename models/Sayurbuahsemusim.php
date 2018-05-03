@@ -50,6 +50,13 @@ class Sayurbuahsemusim extends \yii\db\ActiveRecord
     {
         return 'sayurbuahsemusim';
     }
+    
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
 
     /**
      * @inheritdoc

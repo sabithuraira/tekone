@@ -97,7 +97,7 @@ $form = ActiveForm::begin();
                                     else echo '-';
                                     echo '</td></tr>';
 
-                                    echo '<tr><td>Petai</td><td>';
+                                    echo '<tr><td>Petsai</td><td>';
                                     if($dataProvider->petsaisawi!=null) echo Yii::$app->formatter->format($dataProvider->petsaisawi, 'decimal');
                                     else echo '-';
                                     echo '</td></tr>';
